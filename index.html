@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kakule Çayı ile 3 Ayda 45 Kilo Verdi!</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background: #fff; color: #111; font-size: 15px; }
+  a { text-decoration: none; color: inherit; }
+
+  /* TOP BAR */
+  .top-bar {
+    background: #ed0d0d;
+    color: #fff;
+    font-size: 12px;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    letter-spacing: 0.3px;
+  }
+  .top-bar span { opacity: 0.9; }
+  .top-bar strong { font-weight: 700; }
+
+  /* HEADER */
+  .header {
+    background: #fff;
+    border-bottom: 2px solid #ed0d0d;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .logo-text {
+    font-size: 26px;
+    font-weight: 900;
+    color: #ed0d0d;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+  .logo-text span { color: #111; }
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .header-actions a {
+    font-size: 13px;
+    color: #333;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .header-actions .canli-tv {
+    background: #ed0d0d;
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .header-actions .canli-tv::before {
+    content: "▶";
+    margin-right: 4px;
+    font-size: 9px;
+  }
+
+  /* NAV */
+  .nav {
+    background: #1a1a1a;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+  }
+  .nav a {
+    display: inline-block;
+    color: #ddd;
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 11px 13px;
+    letter-spacing: 0.3px;
+    transition: color 0.2s, background 0.2s;
+    text-transform: uppercase;
+  }
+  .nav a:hover, .nav a.active { color: #fff; background: #ed0d0d; }
+  .nav a.special { color: #FFD700; }
+
+  /* BREAKING BAR */
+  .breaking-bar {
+    background: #f4f4f4;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 8px 0;
+    overflow: hidden;
+  }
+  .breaking-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .breaking-label {
+    background: #ed0d0d;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 2px;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .breaking-text {
+    font-size: 13px;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* BREADCRUMB */
+  .breadcrumb {
+    max-width: 860px;
+    margin: 14px auto 0;
+    padding: 0 16px;
+    font-size: 12.5px;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .breadcrumb a { color: #ed0d0d; }
+  .breadcrumb span { color: #bbb; }
+
+  /* ARTICLE */
+  .article-wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 16px 40px;
+  }
+
+  .article-meta-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0 6px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .article-category {
+    background: #ed0d0d;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 9px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .article-date {
+    font-size: 12.5px;
+    color: #888;
+  }
+
+  .article-title {
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1.25;
+    margin: 12px 0 10px;
+    color: #111;
+    letter-spacing: -0.3px;
+  }
+
+  .article-summary {
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #444;
+    border-left: 4px solid #ed0d0d;
+    padding-left: 14px;
+    margin-bottom: 18px;
+    background: #fafafa;
+    padding: 12px 14px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .article-author-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .article-author {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .author-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #ed0d0d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .author-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #222;
+  }
+
+  .share-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .share-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    letter-spacing: 0.2px;
+  }
+  .share-fb { background: #1877F2; color: #fff; }
+  .share-copy { background: #e8e8e8; color: #333; }
+
+  .youtube-cta {
+    display: block;
+    background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
+    color: #fff;
+    text-align: center;
+    padding: 13px 20px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border: 1px solid #333;
+    letter-spacing: 0.2px;
+    transition: background 0.2s;
+  }
+  .youtube-cta:hover { background: #ed0d0d; color: #fff; }
+  .youtube-cta::before { content: "▶  "; }
+
+  .article-img {
+    width: 100%;
+    border-radius: 4px;
+    display: block;
+    margin-bottom: 20px;
+    background: #eee;
+  }
+  .article-img-placeholder {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 4px;
+    background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: #aaa;
+    font-size: 13px;
+  }
+
+  .article-body {
+    font-size: 16px;
+    line-height: 1.75;
+    color: #222;
+  }
+  .article-body p { margin-bottom: 16px; }
+  .article-body h3 {
+    font-size: 17px;
+    font-weight: 800;
+    color: #111;
+    margin: 22px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #ed0d0d;
+  }
+  .article-body em {
+    font-style: normal;
+    background: #fffbe6;
+    padding: 10px 16px;
+    display: block;
+    border-left: 3px solid #f4b800;
+    margin-bottom: 14px;
+    color: #333;
+    font-size: 15.5px;
+    line-height: 1.7;
+    border-radius: 0 3px 3px 0;
+  }
+
+  .source-tag {
+    font-size: 12.5px;
+    color: #888;
+    margin-top: 24px;
+    padding-top: 14px;
+    border-top: 1px solid #eee;
+  }
+
+  /* MOST READ */
+  .most-read {
+    max-width: 860px;
+    margin: 30px auto;
+    padding: 0 16px;
+  }
+  .section-title {
+    font-size: 16px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #111;
+    border-left: 4px solid #ed0d0d;
+    padding-left: 10px;
+    margin-bottom: 16px;
+  }
+  .most-read-list { display: flex; flex-direction: column; gap: 1px; }
+  .most-read-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .mr-num {
+    font-size: 22px;
+    font-weight: 900;
+    color: #ed0d0d;
+    min-width: 28px;
+    text-align: center;
+    line-height: 1;
+  }
+  .mr-img {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 3px;
+    flex-shrink: 0;
+    background: #e5e5e5;
+  }
+  .mr-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #222;
+    flex: 1;
+  }
+  .mr-title:hover { color: #ed0d0d; }
+
+  /* FOOTER */
+  .footer {
+    background: #111;
+    color: #ccc;
+    padding: 36px 0 20px;
+    margin-top: 40px;
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+  .footer-logo {
+    font-size: 24px;
+    font-weight: 900;
+    color: #ed0d0d;
+    letter-spacing: -0.5px;
+    margin-bottom: 20px;
+    display: block;
+  }
+  .footer-logo span { color: #fff; }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 28px;
+    margin-bottom: 28px;
+  }
+  .footer-col h4 {
+    font-size: 12px;
+    font-weight: 800;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 7px; }
+  .footer-col a { font-size: 13px; color: #999; }
+  .footer-col a:hover { color: #ed0d0d; }
+  .footer-social {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .social-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+  }
+  .s-tw { background: #1DA1F2; }
+  .s-ig { background: linear-gradient(45deg, #f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+  .s-yt { background: #FF0000; }
+  .s-fb { background: #1877F2; }
+  .s-tg { background: #0088cc; }
+  .s-li { background: #0A66C2; }
+  .footer-bottom {
+    border-top: 1px solid #333;
+    padding-top: 16px;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 640px) {
+    .article-title { font-size: 21px; }
+    .nav a { font-size: 11.5px; padding: 10px 9px; }
+    .mr-num { font-size: 18px; min-width: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <span>10 Haziran 2026 Çarşamba</span>
+  <strong>|</strong>
+  <span>İstanbul: 24°C ☀️</span>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <img src="/uploads/logo.png" alt="Ensonhaber" style="height:36px; display:block;">
+    </div>
+    <div class="header-actions">
+      <a href="#">🔍 Ara</a>
+      <a href="#" class="canli-tv">Canlı TV</a>
+      <a href="#">Üyelik</a>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="active">SON DAKİKA</a>
+    <a href="#">YAZARLAR</a>
+    <a href="#">GÜNDEM</a>
+    <a href="#">EKONOMİ</a>
+    <a href="#">ESH SPOR</a>
+    <a href="#">DÜNYA</a>
+    <a href="#">MAGAZİN</a>
+    <a href="#">TEKNOLOJİ</a>
+    <a href="#">SAĞLIK</a>
+    <a href="#" class="special">⚽ 2026 DÜNYA KUPASI</a>
+  </div>
+</nav>
+
+<!-- BREAKING -->
+<div class="breaking-bar">
+  <div class="breaking-inner">
+    <span class="breaking-label">Son Dakika</span>
+    <span class="breaking-text">Netanyahu, Cumhurbaşkanı Erdoğan ve Türkiye'yi hedef aldı &nbsp;|&nbsp; Trump'tan Erdoğan'a övgü: O çok güçlü biri &nbsp;|&nbsp; Adana'da 12'nci kattan düşen kız çocuğu hayata kalmayı başardı</span>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="#">Haberler</a>
+  <span>›</span>
+  <a href="#">Sağlık</a>
+  <span>›</span>
+  <span style="color:#555;">Kakule Çayı ile 6 Ayda 50 Kilo Verdi!</span>
+</div>
+
+<!-- ARTICLE -->
+<main class="article-wrap">
+
+  <div class="article-meta-top">
+    <span class="article-category">Sağlık</span>
+    <span class="article-date">10 Haziran 2026 - 22:01 &nbsp;|&nbsp; Güncelleme: 10 Haziran 2026 - 22:14</span>
+  </div>
+
+  <h1 class="article-title">Kakule Çayı ile 6 Ayda 50 Kilo Verdi!
+</h1>
+
+    <img src="/uploads/haber2.png" alt="Uzman: Mucizevi bitkinin adı Kakule" class="article-img">
+  <div class="article-summary">Kakule Çayı ile 6 Ayda 50 Kilo Verdiğini İddia Eden Fatma M.'nin Hikâyesi Sosyal Medyada Gündem Oldu. Sosyal medyada paylaşılan dikkat çekici bir gönderi, kısa sürede binlerce kişinin ilgisini çekti. Paylaşımda yer alan Fatma M., kakule çayı tüketimi ve yaşam tarzı değişiklikleri sayesinde 6 ayda 50 kilo verdiğini iddia etti.
+  </div>
+
+
+
+ <a href="https://www.kakulecayi.com" target="_blank" class="youtube-cta">
+      KAKULE ÇAYI RESMİ SAYFASINDAN SİPARİŞ VERMEK İÇİN TIKLAYIN
+    </a>
+
+  <div class="article-body">
+
+    <img src="/uploads/sssssss.png" alt="Diyetisyen Ersin Özdemir" class="article-img">
+
+    <h3>Kakule Çayı Nedir?</h3>
+	<br>
+	Son yıllarda bitkisel çaylara olan ilgi artarken, kakule çayı da hem aroması hem de geleneksel kullanımıyla dikkat çeken içecekler arasında yer alıyor. Özellikle doğal ve katkısız içecek arayışında olan tüketiciler tarafından sıkça araştırılan kakule çayı, farklı kültürlerde yüzyıllardır kullanılan bir bitkiden elde ediliyor.<br><br>Sağlıklı yaşam uzmanları, kakule çayının dengeli beslenme ve aktif yaşam tarzı ile birlikte tüketildiğinde günlük rutinlere katkı sağlayabileceğini ifade ediyor.
+	<br><br>
+	<p>
+	Fatma M., yaptığı paylaşımda uzun yıllardır fazla kilolarıyla mücadele ettiğini ve bu süreçte beslenme alışkanlıklarını tamamen değiştirdiğini belirtti. Günlük yürüyüşler yaptığını, şekerli gıdalardan uzak durduğunu ve kakule çayını düzenli olarak tükettiğini söyleyen Fatma M., üç ay sonunda büyük bir değişim yaşadığını ifade etti.</p>
+
+
+
+
+    <h3>DR. Ender SARAÇ Tavsiye Ediyor."</h3>
+	
+    <img src="
+	/uploads/endersarac.png" alt="Uzman: Mucizevi bitkinin adı Kakule" class="article-img">
+
+ <h3> DR. Ender SARAÇ :  Kakule Çayı Sağlıklı Yaşam Rutininin Bir Parçası Olabilir</h3>
+    <em>Beslenme ve sağlıklı yaşam uzmanları, kilo kontrolü sürecinde tek bir ürünün mucizevi sonuçlar sağlamadığını, ancak bazı alışkanlıkların süreci destekleyebileceğini belirtiyor.
+<br><br>
+Uzmanlara göre kakule çayı, hoş aroması ve günlük sıvı tüketimine katkısı nedeniyle sağlıklı yaşam rutinlerinde tercih edilen bitki çayları arasında yer alıyor. Düzenli ve dengeli beslenme programı ile birlikte tüketildiğinde, kişilerin sağlıklı yaşam alışkanlıklarını sürdürmelerine yardımcı olabilecek seçeneklerden biri olarak değerlendiriliyor.
+<br><br>
+"Kilo kontrolünde temel unsur dengeli beslenme ve aktif yaşam tarzıdır. Bitki çayları ise bu süreci destekleyen tamamlayıcı unsurlar olarak düşünülebilir. Kakule çayı da hoş aroması ve kullanım kolaylığı nedeniyle birçok kişinin günlük rutinine dahil ettiği içeceklerden biridir."
+    </em>
+
+<br><br>
+
+ <a href="https://www.kakulecayi.com" target="_blank" class="youtube-cta">
+      KAKULE ÇAYI RESMİ SAYFASINDAN SİPARİŞ VERMEK İÇİN TIKLAYIN
+    </a>
+
+
+
+    <h3>YÜZLERCE İNSAN BAŞARIYOR! INANILMAZ!</h3>
+	
+    <img src="/uploads/haber1.png" alt="Kakule Çayı Nasıl Zayıflatıyor?" class="article-img">
+ 
+     "Sosyal Medya'da en çok dikkat çeken kişilerden birisi olan imkansızı başardı! Tam 45 kilo verdi!
+	 <br><br><i>Hayatımın en zor ama en kararlı dönemlerinden biriydi. Beslenme düzenimi değiştirdim, hareketli bir yaşam tarzı benimsedim ve kendime yeni hedefler koydum. Aynaya baktığımda bambaşka bir insan gördüm."</i><br>
+	 <br>
+
+
+    <h3>Uzman Diyetisyen Hande R.: "Kilo Kontrolü Sürecinde Kakule Çayı Destekleyici Bir Tercih Olabilir.</h3>
+	    <img src="/uploads/diyet.png" alt="Fatma Hanım kakule çayıyla 2 ayda 18 kilo verdi" class="article-img">
+
+    <em>
+     Son dönemde sağlıklı yaşam ve kilo kontrolü alanında adından sıkça söz ettiren kakule çayı, kullanıcıların yoğun ilgisini çekmeye devam ediyor. Özellikle doğal içeriklere yönelen tüketiciler arasında popüler hale gelen bu aromatik içecek, günlük rutinlerin vazgeçilmez parçalarından biri olmaya başladı.
+	 <br> <br>
+	 Son aylarda sosyal medya ve kullanıcı deneyimlerinde kakule çayına yönelik ilginin arttığı görülürken, birçok kişi ürünün özellikle günlük yaşam programlarına kolayca uyum sağlayabilmesini önemli bir avantaj olarak değerlendiriyor.
+ <br> <br>
+Uzman Diyetisyen Hande R. açıklamasını şu sözlerle tamamladı:
+ <br>
+<i>Sağlıklı yaşam bir maratondur, kısa süreli bir yarış değil. Düzenli beslenme, aktif yaşam ve doğru seçimlerle desteklenen bir program içerisinde kakule çayı da tüketicilerin tercih edebileceği doğal içeceklerden biri olabilir.</i>
+    </em>
+<br>
+
+
+
+    <img src="/uploads/1s1.png" alt="Kakule çayı ile 3 ayda 45 kilo verdi" class="article-img">
+	
+	
+	
+Kakule Çayı, düzenli kullanıldığında ayda 4-6 kilo verdirmeyi başaran harika bitkisel bir ürün. Yüzlerce kişi düzenli kullanımda kilo verdiği gözlenmiştir. Sipariş vermek için resmi sayfasından sipariş vermeye dikkat ediniz.
+
+<br><br>
+    <a href="https://www.kakulecayi.com" target="_blank" class="youtube-cta">
+      KAKULE ÇAYI RESMİ SAYFASINDAN SİPARİŞ VERMEK İÇİN TIKLAYIN
+    </a>
+
+    <p class="source-tag">Kaynak: Ensonhaber Haber Merkezi</p>
+  </div>
+</main>
+
+<!-- MOST READ -->
+<section class="most-read">
+  <div class="section-title">Çok Okunanlar</div>
+  <div class="most-read-list">
+
+    <div class="most-read-item">
+      <div class="mr-num">1</div>
+      <img src="https://imgcdn.ensonhaber.com/media/esh/2026/06/10/6a29aacf985dc529.jpg?w=320&h=240" alt="" class="mr-img" onerror="this.style.background='#ddd'">
+      <div class="mr-title">Nureddin Nebati, İbrahim Tatlıses'i ziyaret etti</div>
+    </div>
+
+    <div class="most-read-item">
+      <div class="mr-num">2</div>
+      <img src="https://imgcdn.ensonhaber.com/media/esh/2026/06/10/6a29a4e886c20801.jpg?w=320&h=240" alt="" class="mr-img" onerror="this.style.background='#ddd'">
+      <div class="mr-title">Netanyahu, Cumhurbaşkanı Erdoğan ve Türkiye'yi hedef aldı</div>
+    </div>
+
+    <div class="most-read-item">
+      <div class="mr-num">3</div>
+      <img src="https://imgcdn.ensonhaber.com/media/esh/2026/06/10/6a2989130d712976.jpg?w=320&h=240" alt="" class="mr-img" onerror="this.style.background='#ddd'">
+      <div class="mr-title">Adana'da 12'nci kattan düşen kız çocuğu hayata kalmayı başardı</div>
+    </div>
+
+    <div class="most-read-item">
+      <div class="mr-num">4</div>
+      <img src="https://imgcdn.ensonhaber.com/media/esh/2026/06/10/6a297d85e7ab4606.jpg?w=320&h=240" alt="" class="mr-img" onerror="this.style.background='#ddd'">
+      <div class="mr-title">Genel merkeze tırmanarak giren Nurhayat Altaca Kayışoğlu ihraç listesinde</div>
+    </div>
+
+    <div class="most-read-item">
+      <div class="mr-num">5</div>
+      <img src="https://imgcdn.ensonhaber.com/media/esh/2026/06/10/6a298c991ad79624.jpg?w=320&h=240" alt="" class="mr-img" onerror="this.style.background='#ddd'">
+      <div class="mr-title">Donald Trump'tan Cumhurbaşkanı Erdoğan'a övgü: O çok güçlü biri</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <img src="/uploads/logo.png" alt="Ensonhaber" style="height:32px; display:block; margin-bottom:20px; filter:brightness(0) invert(1);">
+
+    <div class="footer-social">
+      <div class="social-icon s-tw">𝕏</div>
+      <div class="social-icon s-ig">📷</div>
+      <div class="social-icon s-yt">▶</div>
+      <div class="social-icon s-fb">f</div>
+      <div class="social-icon s-tg">✈</div>
+      <div class="social-icon s-li">in</div>
+    </div>
+
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Haberler</h4>
+        <ul>
+          <li><a href="#">Güncel Haberler</a></li>
+          <li><a href="#">Spor Haberleri</a></li>
+          <li><a href="#">Ekonomi Haberleri</a></li>
+          <li><a href="#">Yaşam Haberleri</a></li>
+          <li><a href="#">Dünya Haberleri</a></li>
+          <li><a href="#">Tüm Haberler</a></li>
+          <li><a href="#">Dünya Kupası 2026</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Servisler</h4>
+        <ul>
+          <li><a href="#">Canlı TV</a></li>
+          <li><a href="#">Foto Galeri</a></li>
+          <li><a href="#">Oyunlar</a></li>
+          <li><a href="#">Namaz Vakitleri</a></li>
+          <li><a href="#">Son Depremler</a></li>
+          <li><a href="#">RSS Servisleri</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kurumsal</h4>
+        <ul>
+          <li><a href="#">Hakkımızda</a></li>
+          <li><a href="#">Künye</a></li>
+          <li><a href="#">İletişim</a></li>
+          <li><a href="#">Yayın İlkeleri</a></li>
+          <li><a href="#">KVKK Politikası</a></li>
+          <li><a href="#">Gizlilik Politikası</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Uygulama</h4>
+        <ul>
+          <li><a href="#">App Store</a></li>
+          <li><a href="#">Google Play</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>ensonhaber.com internet sitesinde yayınlanan yazı, haber ve fotoğrafların her türlü telif hakkı Ensonhaber Medya A.Ş'ye aittir. İzin alınmadan, kaynak gösterilerek dahi iktibas edilemez.</p>
+      <p style="margin-top:6px;">© 2026 Ensonhaber Medya A.Ş. Tüm hakları saklıdır.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
